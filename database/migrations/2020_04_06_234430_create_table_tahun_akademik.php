@@ -13,7 +13,7 @@ class CreateTableTahunAkademik extends Migration
      */
     public function up()
     {
-        Schema::create('tb_tahun_akademik', function (Blueprint $table) {
+        Schema::create('tahun_akademiks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tahun_akademik');
             $table->string('keterangan');
