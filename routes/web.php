@@ -19,4 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/mahasiswa','MahasiswaController');
-
+Route::post('/mahasiswa/cekkonsentrasi','MahasiswaController@cekkonsentrasi')->name('mahasiswa.cekkonsentrasi');
+Route::resource('/dosen','DosenController');
+Route::resource('/konsentrasi','KonsentrasiController');
+Route::resource('prodi','ProdiController');
+Route::resource('/ruangan','RuanganController');
+Route::resource('/tahunangkatan','TahunAngkatanController');
+Route::resource('/tahunakademik','TahunAkademikController');
+Route::resource('/matkul','MatkulController');

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Prodi;
+use App\Konsentrasi;
+use App\Mahasiswa;
+use App\TahunAngkatan;
+use Illuminate\Support\Facades\Input;
 class MahasiswaController extends Controller
 {
     /**
@@ -12,8 +16,27 @@ class MahasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('mahasiswa.index_mahasiswa');
+    {   
+        $so_prodi = Prodi::all();
+        
+        $so_tahun_angkatan = TahunAngkatan::all();
+
+        $prodi = Input::get('prodi');
+        $konsentrasi = Input::get('konsentrasi');
+        $so_konsentrasi = Konsentrasi::where('prodi_id',$prodi)->get();
+        $tahun_angkatan = Input::get('tahun_angkatan');
+        if(isset( $prodi )){
+
+            $mahasiswa =  Mahasiswa::where([
+                'prodi_id'          => $prodi,
+                'konsentrasi_id'    => $konsentrasi,
+                'tahun_angkatan_id' => $tahun_angkatan,
+            ])->get();
+             return view('mahasiswa.index_mahasiswa',compact('so_prodi','so_konsentrasi','so_tahun_angkatan','mahasiswa'));
+        }
+        
+        return view('mahasiswa.index_mahasiswa',compact('so_prodi','so_konsentrasi','so_tahun_angkatan'));
+
     }
 
     /**
@@ -23,7 +46,10 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create_mahasiswa');
+        $prodi = Prodi::all();
+        $konsentrasi = Konsentrasi::all();
+        $tahun_angkatan = TahunAngkatan::all();
+        return view('mahasiswa.create_mahasiswa',compact('prodi','konsentrasi','tahun_angkatan'));
     }
 
     /**
@@ -34,7 +60,8 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mahasiswa::create($request->all());
+        return redirect(route('mahasiswa.index'))->with('pesan','Berhasil Disimpan');
     }
 
     /**
@@ -45,7 +72,12 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-        //
+        $mahasiswa =  Mahasiswa::findOrFail($id);
+        return view('mahasiswa.detail_mahasiswa',compact('mahasiswa'));
+    }
+
+    public function cekkonsentrasi(Request $request){
+        return Konsentrasi::where('prodi_id',$request->id)->get();
     }
 
     /**
@@ -56,7 +88,11 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $prodi = Prodi::all();
+        $konsentrasi = Konsentrasi::all();
+        $tahun_angkatan = TahunAngkatan::all();
+        return view('mahasiswa.edit_mahasiswa',compact('prodi','konsentrasi','tahun_angkatan','mahasiswa'));
     }
 
     /**
@@ -68,7 +104,9 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->update($request->all());
+        return redirect(route('mahasiswa.index'))->with('pesan','Berhasil diupdate');
     }
 
     /**
@@ -79,6 +117,7 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Mahasiswa::findOrFail($id);
+        return redirect(route('mahasiswa.index'))->with('pesan','Berhasil diHapus');
     }
 }
