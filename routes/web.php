@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/registrasi/delete/{id}','RegistrasiController@hapus');
 Route::resource('/mahasiswa','MahasiswaController');
 Route::post('/mahasiswa/cekkonsentrasi','MahasiswaController@cekkonsentrasi')->name('mahasiswa.cekkonsentrasi');
 Route::resource('/dosen','DosenController');
@@ -27,3 +28,6 @@ Route::resource('/ruangan','RuanganController');
 Route::resource('/tahunangkatan','TahunAngkatanController');
 Route::resource('/tahunakademik','TahunAkademikController');
 Route::resource('/matkul','MatkulController');
+Route::resource('/registrasi','RegistrasiController');
+Route::post('/registrasi/cari','RegistrasiController@cari')->name('registrasi.cari');
+
