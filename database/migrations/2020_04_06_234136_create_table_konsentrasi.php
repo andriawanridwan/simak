@@ -13,7 +13,7 @@ class CreateTableKonsentrasi extends Migration
      */
     public function up()
     {
-        Schema::create('konsentrasis', function (Blueprint $table) {
+        Schema::create('tb_konsentrasi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('konsentrasi');
             $table->string('prodi_id');

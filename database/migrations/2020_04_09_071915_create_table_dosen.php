@@ -18,7 +18,7 @@ class CreateTableDosen extends Migration
             $table->string('nama');
             $table->string('no_telp');
             $table->string('email');
-            $table->string('prodi');
+            $table->integer('prodi_id');
             $table->timestamps();
         });
     }

@@ -13,11 +13,10 @@ class CreateTableTahunAkademik extends Migration
      */
     public function up()
     {
-        Schema::create('tahun_akademiks', function (Blueprint $table) {
+        Schema::create('tb_tahun_akademik', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tahun_akademik');
             $table->string('keterangan');
-            $table->date('batas_registrasi');
             $table->string('status');
             $table->timestamps();
         });
