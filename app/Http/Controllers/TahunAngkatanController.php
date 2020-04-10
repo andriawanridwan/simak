@@ -13,7 +13,7 @@ class TahunAngkatanController extends Controller
      */
     public function index()
     {
-        return view('tahunangkatan.index_tahunangkatan');
+        return view('TahunAngkatan.index_tahunangkatan');
     }
 
     /**
@@ -23,7 +23,7 @@ class TahunAngkatanController extends Controller
      */
     public function create()
     {
-        return view('tahunangkatan.create_tahunangkatan');
+        return view('TahunAngkatan.create_tahunangkatan');
     }
 
     /**

@@ -63,7 +63,6 @@ class MahasiswaController extends Controller
         Mahasiswa::create($request->all());
         return redirect(route('mahasiswa.index'))->with('pesan','Berhasil Disimpan');
     }
-
     /**
      * Display the specified resource.
      *

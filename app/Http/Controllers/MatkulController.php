@@ -13,7 +13,7 @@ class MatkulController extends Controller
      */
     public function index()
     {
-        return view('matkul.index_matkul');
+        return view('Matkul.index_matkul');
     }
 
     /**
@@ -23,7 +23,7 @@ class MatkulController extends Controller
      */
     public function create()
     {
-        return view('matkul.create_matkul');
+        return view('Matkul.create_matkul');
     }
 
     /**

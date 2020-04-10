@@ -13,7 +13,7 @@ class KonsentrasiController extends Controller
      */
     public function index()
     {
-        return view('konsentrasi.index_konsentrasi');
+        return view('Konsentrasi.index_konsentrasi');
     }
 
     /**
@@ -23,7 +23,7 @@ class KonsentrasiController extends Controller
      */
     public function create()
     {
-        return view('konsentrasi.create_konsentrasi');
+        return view('Konsentrasi.create_konsentrasi');
     }
 
     /**

@@ -15,7 +15,7 @@ class ProdiController extends Controller
     public function index()
     {
         $prodi = Prodi::all();
-        return view('prodi.index_prodi',compact('prodi'));
+        return view('Prodi.index_prodi',compact('prodi'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        return view('prodi.create_prodi');
+        return view('Prodi.create_prodi');
     }
 
 
