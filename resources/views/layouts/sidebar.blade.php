@@ -15,7 +15,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{{route('jadwal.index')}}">Jadwal Kuliah</a></li>
                   <li><a class="nav-link" href="layout-transparent.html">Kartu Hasil Studi</a></li>
-                  <li><a class="nav-link" href="layout-top-navigation.html">Kartu Rencana Studi</a></li>
+                  <li><a class="nav-link" href="{{route('krs.index')}}">Kartu Rencana Studi</a></li>
                   <li><a class="nav-link" href="{{route('matkul.index')}}">Mata Kuliah</a></li>
                    <li><a class="nav-link" href="{{route('registrasi.index')}}">Register</a></li>
                   <li><a class="nav-link" href="{{route('tahunakademik.index')}}">Tahun Akademik</a></li>
