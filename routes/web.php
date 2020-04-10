@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/registrasi/delete/{id}','RegistrasiController@hapus');
+Route::get('/krs/delete/{id}','KrsController@hapus');
 Route::resource('/mahasiswa','MahasiswaController');
 Route::post('/mahasiswa/cekkonsentrasi','MahasiswaController@cekkonsentrasi')->name('mahasiswa.cekkonsentrasi');
 Route::resource('/dosen','DosenController');
@@ -29,6 +30,10 @@ Route::resource('/tahunangkatan','TahunAngkatanController');
 Route::resource('/tahunakademik','TahunAkademikController');
 Route::resource('/matkul','MatkulController');
 Route::resource('/jadwal','JadwalController');
+Route::resource('/krs','KrsController');
+Route::get('/krs/ambil/{nim}/{jadwal_id}','KrsController@ambilkrs')->name('ambilkrs');
+Route::post('krs/cari','KrsController@cari')->name('krs.cari');
+Route::post('krs/carinama','KrsController@carinama')->name('krs.carinama');
 Route::post('/jadwal/cari','JadwalController@cari')->name('jadwal.cari');
 Route::post('/jadwal/hariupdate','JadwalController@hariupdate')->name('hari.update');
 Route::post('/jadwal/ruangupdate','JadwalController@ruangupdate')->name('ruangan_update');

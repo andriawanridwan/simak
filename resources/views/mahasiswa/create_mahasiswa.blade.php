@@ -27,22 +27,23 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="">NIM</label>
-                        <input type="text" name="nim" class="form-control">
+                        <input type="text" name="nim" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="">Nama</label>
-                        <input type="text" name="nama" class="form-control">
+                        <input type="text" name="nama" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="">Jenis Kelamin</label>
-                        <select name="jk" id="" class="form-control">
+                        <select name="jk" id="" class="form-control" required>
+                            <option value="" disabled selected>-- Pilih Jk --</option>
                             <option>Laki - laki</option>
                             <option>Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="">Agama</label>
-                        <select name="agama" id="" class="form-control">
+                        <select name="agama" id="" class="form-control" required>
                             <option value="">-- Pilih Agama --</option>
                             <option>Budha</option>
                             <option>Hindu</option>
@@ -57,18 +58,18 @@
                         <label for="">Tempat, Tanggal Lahir</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="text" name="tempat_lahir" class="form-control">
+                                <input type="text" name="tempat_lahir" class="form-control" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="date" name="tanggal_lahir" class="form-control">
+                                <input type="date" name="tanggal_lahir" class="form-control" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="">Tahun Angkatan</label>
-                        <select name="tahun_angkatan_id" id="" class="form-control">
-                            <option value="" disabled>-- Pilih Tahun Angkatan --</option>
+                        <select name="tahun_angkatan_id" id="" class="form-control" required>
+                            <option value="" disabled selected>-- Pilih Tahun Angkatan --</option>
                             @foreach($tahun_angkatan as $ta)
                                 <option value="{{$ta->id}}">{{ $ta->tahun_angkatan }}</option>
                             @endforeach
@@ -79,19 +80,17 @@
                         <label for="">Prodi, Konsentrasi</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <select name="prodi_id" id="" class="form-control">
-                                    <option value="" disabled>-- Pilih Prodi --</option>
+                                <select name="prodi_id" id="prodi" class="form-control" required>
+                                    <option value="" disabled selected>-- Pilih Prodi --</option>
                                     @foreach($prodi as $p)
                                         <option value="{{ $p->id }}">{{ $p->prodi }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <select name="konsentrasi_id" id="" class="form-control">
-                                    <option value="" disabled>-- Pilih Konsentrasi --</option>
-                                    @foreach($konsentrasi as $k)
-                                        <option value="{{ $k->id }}">{{ $k->konsentrasi }}</option>
-                                    @endforeach
+                                <select name="konsentrasi_id" id="konsentrasi" class="form-control" required>
+                                    <option value="" disabled selected>-- Pilih Konsentrasi --</option>
+                                    
                                 </select>
                             </div>
                         </div>
@@ -99,7 +98,7 @@
 
                     <div class="form-group">
                         <label for="">Alamat</label>
-                        <textarea name="alamat" id="" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="alamat" id="" cols="30" rows="10" class="form-control" required></textarea>
                     </div>
                 </div>
             </div>
@@ -112,29 +111,29 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">NIK Ayah</label>
-                            <input type="text" name="nik_ayah" class="form-control">
+                            <input type="text" name="nik_ayah" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="">Nama Ayah</label>
-                            <input type="text" name="nama_ayah" class="form-control">
+                            <input type="text" name="nama_ayah" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="">Pekerjaan Ayah</label>
-                            <input type="text" name="pekerjaan_ayah" class="form-control">
+                            <input type="text" name="pekerjaan_ayah" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">NIK Ibu</label>
-                            <input type="text" name="nik_ibu" class="form-control">
+                            <input type="text" name="nik_ibu" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="">Nama Ibu</label>
-                            <input type="text" name="nama_ibu" class="form-control">
+                            <input type="text" name="nama_ibu" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="">Pekerjaan Ibu</label>
-                            <input type="text" name="pekerjaan_ibu" class="form-control">
+                            <input type="text" name="pekerjaan_ibu" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -150,3 +149,27 @@
         </div>
     </div>
 @endsection
+
+@push('myjs')
+<script>
+$('#prodi').change(function(){
+    var id = $(this).val();
+    $.ajax({
+        url : "{{ route('mahasiswa.cekkonsentrasi') }}",
+        type : 'POST',
+        data : {id : id},
+        success:function(data){
+            var opt = '<option value="" disabled selected>-- Pilih Konsentrasi --</option>';
+            $('#konsentrasi').empty().append(opt);
+
+            $.each(data, function(index,item){
+                $('#konsentrasi').append($("<option/>", {
+                                            value: item.id,
+                                            text: item.konsentrasi
+                                        }));
+            });
+        }
+    });
+})
+</script>
+@endpush
