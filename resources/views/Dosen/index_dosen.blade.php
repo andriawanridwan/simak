@@ -15,18 +15,35 @@
 <div class="card">
     <div class="card-body">
         <a href="{{ route('dosen.create') }}" class="btn btn-primary mb-4">+ Tambah Data</a>
+        <div class="table-responsive">
         <table id="example" class="table table-stripped table-bordered">
             <thead>
-                <tr>
-                    <th>No</th>
+                <tr align="center">
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    <th>No Telpon</th>
+                    <th>Email</th>
+                    <th>Prodi</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
+            @foreach($data_dosen as $dosen)
+                <tr align="center">
+                    <td>{{$dosen->nip}}</td>
+                    <td>{{$dosen->nama}}</td>
+                    <td>{{$dosen->no_telp}}</td>
+                    <td>{{$dosen->email}}</td>
+                    <td>{{$dosen->prodi}}</td>
+                    <td>
+                        <a href="/dosen/{{$dosen->nip}}/edit" class="btn btn-warning">Edit</a>
+                        <a href="/dosen/{{$dosen->nip}}/delete" class="btn btn-danger">Hapus</a>
+                    </td>
                 </tr>
+            @endforeach
             </tbody>
         </table>
+        </div> 
     </div>
 </div>
 

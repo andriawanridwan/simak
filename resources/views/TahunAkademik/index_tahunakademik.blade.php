@@ -15,6 +15,7 @@
 <div class="card">
     <div class="card-body">
         <a href="{{ route('tahunakademik.create') }}" class="btn btn-primary mb-4">+ Tambah Data</a>
+        <div class="table-responsive">
         <table id="example" class="table table-stripped table-bordered">
             <thead>
                 <tr align="center">  
@@ -38,6 +39,7 @@
             @endforeach
             </tbody>
         </table>
+        </div>
     </div>
 </div>
 
