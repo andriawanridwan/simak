@@ -13,7 +13,7 @@ class DosenController extends Controller
      */
     public function index()
     {
-        return view('dosen.index_dosen');
+        return view('Dosen.index_dosen');
     }
 
     /**
@@ -23,7 +23,7 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('dosen.create_dosen');
+        return view('Dosen.create_dosen');
     }
 
     /**

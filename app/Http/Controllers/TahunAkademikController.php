@@ -12,8 +12,9 @@ class TahunAkademikController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('tahunakademik.index_tahunakademik');
+    {   
+        $data_tahun_akademik = \App\TahunAkademik::all();
+        return view('TahunAkademik.index_tahunakademik',['data_tahun_akademik' => $data_tahun_akademik]);
     }
 
     /**
@@ -23,7 +24,8 @@ class TahunAkademikController extends Controller
      */
     public function create()
     {
-        return view('tahunakademik.create_tahunakademik');
+        return view('TahunAkademik.create_tahunakademik');
+        
     }
 
     /**
@@ -34,7 +36,8 @@ class TahunAkademikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        \App\TahunAkademik::create($request->all());
+        return redirect(route('tahunakademik.index'))->with('pesan','Berhasil Disimpan');;
     }
 
     /**
@@ -56,7 +59,8 @@ class TahunAkademikController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tahun_akademik = \App\TahunAkademik::find($id);
+        return view('TahunAkademik.edit_tahunakademik',['tahun_akademik' => $tahun_akademik]);
     }
 
     /**
@@ -68,7 +72,9 @@ class TahunAkademikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tahun_akademik = \App\TahunAkademik::find($id);
+        $tahun_akademik->update($request->all());
+        return redirect(route('tahunakademik.index'))->with('pesan','Berhasil Diupdate');
     }
 
     /**
@@ -79,6 +85,8 @@ class TahunAkademikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tahun_akademik = \App\TahunAkademik::find($id);
+        $tahun_akademik->delete($tahun_akademik);
+        return redirect(route('tahunakademik.index'))->with('pesan','Berhasil Dihapus');
     }
 }

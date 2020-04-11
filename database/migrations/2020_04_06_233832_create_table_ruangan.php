@@ -13,7 +13,7 @@ class CreateTableRuangan extends Migration
      */
     public function up()
     {
-        Schema::create('ruangans', function (Blueprint $table) {
+        Schema::create('tb_ruangans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('ruangan');
             $table->timestamps();

@@ -13,7 +13,7 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        return view('ruangan.index_ruangan');
+        return view('Ruangan.index_ruangan');
     }
 
     /**
@@ -23,7 +23,7 @@ class RuanganController extends Controller
      */
     public function create()
     {
-        return view('ruangan.create_ruangan');
+        return view('Ruangan.create_ruangan');
     }
 
     /**

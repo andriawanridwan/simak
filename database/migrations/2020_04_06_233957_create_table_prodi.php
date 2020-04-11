@@ -13,7 +13,7 @@ class CreateTableProdi extends Migration
      */
     public function up()
     {
-        Schema::create('prodis', function (Blueprint $table) {
+        Schema::create('tb_prodis', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('prodi');
             $table->timestamps();

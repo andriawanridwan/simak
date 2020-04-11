@@ -15,6 +15,8 @@ class CreateTableMatkul extends Migration
     {
         Schema::create('tb_matkul', function (Blueprint $table) {
             $table->string('kode_matkul')->primary();
+            $table->integer('prodi_id');
+            $table->integer('konsentrasi_id');
             $table->string('matkul');
             $table->integer('sks');
             $table->integer('semester');

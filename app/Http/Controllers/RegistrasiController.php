@@ -20,7 +20,7 @@ class RegistrasiController extends Controller
         $prodi = Prodi::all();
         $tahun_angkatan = TahunAngkatan::all();
         $tahun_akademik = TahunAkademik::all();
-        return view('registrasi.index_registrasi',compact('prodi','tahun_angkatan','tahun_akademik'));
+        return view('Registrasi.index_registrasi',compact('prodi','tahun_angkatan','tahun_akademik'));
     }
 
     public function cari(Request $request){
