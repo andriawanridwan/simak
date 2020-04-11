@@ -15,11 +15,12 @@ class CreateTableKhs extends Migration
     {
         Schema::create('tb_khs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('nim');
             $table->integer('krs_id');
-            $table->integer('kehadiran');
-            $table->integer('tugas');
-            $table->integer('mutu');
-            $table->string('grade');
+            $table->integer('kehadiran')->nullable();
+            $table->integer('tugas')->nullable();
+            $table->integer('mutu')->nullable();
+            $table->string('grade')->nullable();
             $table->timestamps();
         });
     }

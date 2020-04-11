@@ -8,6 +8,7 @@ use App\Registrasi;
 use App\Jadwal;
 use App\Mahasiswa;
 use App\Krs;
+use App\Khs;
 class KrsController extends Controller
 {
     /**
@@ -116,7 +117,12 @@ class KrsController extends Controller
             Krs::insert([
             'nim' => $nim,
             'jadwal_id' => $jadwal_id
-        ]);
+            ]);
+            $k = Krs::OrderBy('id','desc')->first();
+            Khs::insert([
+                'nim'    => $nim,
+                'krs_id' => $k->id
+            ]);
         }
         
         return redirect(route('krs.show',$nim));

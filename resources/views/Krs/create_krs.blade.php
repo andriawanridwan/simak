@@ -47,12 +47,9 @@
                             <td>{{$k->matkul->sks}}</td>
                             <td>{{$k->dosen->nama}}</td>
 
-                                @foreach($krs as $p)
-                                    @if($p->jadwal_id != $k->id)
                                             <td><a href="{{route('ambilkrs',[$mahasiswa->nim,$k->id])}}" class="btn btn-primary">Ambil</a></td>
                                     
-                                    @endif
-                                @endforeach
+                                
                             
                         
                         </tr>
