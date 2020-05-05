@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Matkul;
 use Illuminate\Http\Request;
-
+use App\Prodi;
+use App\Konsentrasi;
 class MatkulController extends Controller
 {
     /**
@@ -13,7 +15,9 @@ class MatkulController extends Controller
      */
     public function index()
     {
-        return view('Matkul.index_matkul');
+       
+        $matkul = Matkul::all();
+        return view('matkul.index_matkul',compact('matkul'));
     }
 
     /**
@@ -23,7 +27,21 @@ class MatkulController extends Controller
      */
     public function create()
     {
-        return view('Matkul.create_matkul');
+        $max = Matkul::max('kode_matkul');
+        $prodi = Prodi::all();
+        $check_max = Matkul::select('Matkul.kode_matkul')->count();
+        if($check_max == null){
+            $max_code = "DTIKB001";
+        }else{
+           
+            $angka1 = (int)substr($max,5);
+            $hsl    = $angka1 +1;
+            $fhsl   = sprintf("%03s",$hsl);
+            $max_code = 'DTIKB'. $fhsl;
+            
+        
+        }
+        return view('matkul.create_matkul',compact('max_code','prodi'));
     }
 
     /**
@@ -34,7 +52,8 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Matkul::create($request->all());
+        return redirect(route('matkul.index'))->with('pesan','Berhasil Disimpan');
     }
 
     /**
@@ -56,7 +75,10 @@ class MatkulController extends Controller
      */
     public function edit($id)
     {
-        //
+        $matkul = Matkul::findOrFail($id);
+        $prodi = Prodi::all();
+        $konsentrasi = Konsentrasi::where('prodi_id',$matkul->prodi_id)->get();
+        return view('matkul.edit_matkul',compact('matkul','prodi','konsentrasi'));
     }
 
     /**
@@ -68,7 +90,9 @@ class MatkulController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $matkul = Matkul::findOrFail($id);
+        $matkul->update($request->all());
+         return redirect(route('matkul.index'))->with('pesan','Berhasil DiUpdate');
     }
 
     /**
@@ -79,6 +103,7 @@ class MatkulController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Matkul::destroy($id);
+        return redirect(route('matkul.index'))->with('pesan','Berhasil Dihapus');
     }
 }

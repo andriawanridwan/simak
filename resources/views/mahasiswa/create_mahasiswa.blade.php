@@ -4,7 +4,7 @@
     <div class="section-header">
             <h1>Tambah Mahasiswa</h1>
     </div>
-
+<div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Otomatis Membuat Akun Mahasiswa dengan nip sebagai username dan password</div>
     <div class="card">
         <div class="card-header">
         <h4>Tambah Mahasiswa</h4>

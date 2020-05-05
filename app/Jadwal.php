@@ -24,4 +24,12 @@ class Jadwal extends Model
     public function dosen(){
         return $this->belongsTo('App\Dosen','dosen_id','nip');
     }
+
+    public function ruangan(){
+        return $this->belongsTo('App\Ruangan');
+    }
+
+     public function tahun_akademik(){
+        return $this->belongsTo('App\TahunAkademik');
+    }
 }

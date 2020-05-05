@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TahunAngkatan;
 use Illuminate\Http\Request;
 
 class TahunAngkatanController extends Controller
@@ -13,7 +14,8 @@ class TahunAngkatanController extends Controller
      */
     public function index()
     {
-        return view('TahunAngkatan.index_tahunangkatan');
+        $tahunangkatan = TahunAngkatan::all();    
+        return view('TahunAngkatan.index_tahunangkatan',compact('tahunangkatan'));
     }
 
     /**
@@ -23,7 +25,7 @@ class TahunAngkatanController extends Controller
      */
     public function create()
     {
-        return view('TahunAngkatan.create_tahunangkatan');
+        return view('tahunangkatan.create_tahunangkatan');
     }
 
     /**
@@ -34,7 +36,8 @@ class TahunAngkatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        TahunAngkatan::create($request->all());
+        return redirect(route('tahunangkatan.index'))->with('pesan','Berhasil Disimpan');
     }
 
     /**
@@ -56,7 +59,8 @@ class TahunAngkatanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tahunangkatan = TahunAngkatan::findOrFail($id);
+        return view('TahunAngkatan.edit_tahunangkatan',compact('tahunangkatan'));
     }
 
     /**
@@ -68,7 +72,9 @@ class TahunAngkatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tahunangkatan = TahunAngkatan::findOrFail($id);
+        $tahunangkatan->update($request->all());
+         return redirect(route('tahunangkatan.index'))->with('pesan','Berhasil DiUpdate');
     }
 
     /**
@@ -79,6 +85,7 @@ class TahunAngkatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        tahunangkatan::destroy($id);
+        return redirect(route('tahunangkatan.index'))->with('pesan','Berhasil DiHapus');
     }
 }

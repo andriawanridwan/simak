@@ -4,6 +4,7 @@
 <div class="section-header">
     <h1>Tambah Dosen</h1>
 </div>
+<div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Otomatis Membuat Akun Dosen dengan nip sebagai username dan password</div>
 <div class="card">
     <div class="card-body">
         <form action="{{ route('dosen.store') }}" method="post">
@@ -30,10 +31,10 @@
 
             <div class="form-group">
                 <label for="">Prodi</label>
-                <select name="prodi"  class="form-control">
+                <select name="prodi_id"  class="form-control">
                     <option disabled selected>-- Pilih Status --</option>
                     @foreach($data_prodi as $prodi)
-                    <option value="{{$prodi->prodi}}" >{{$prodi->prodi}}</option>
+                    <option value="{{$prodi->id}}" >{{$prodi->prodi}}</option>
                     @endforeach
                 </select>
             </div>

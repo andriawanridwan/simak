@@ -16,15 +16,32 @@
     <div class="card-body">
         <a href="{{ route('ruangan.create') }}" class="btn btn-primary mb-4">+ Tambah Data</a>
         <table id="example" class="table table-stripped table-bordered">
-            <thead>
+             <thead>
                 <tr>
-                    <th>No</th>
+                    <th style="max-width:10px;">No</th>
+                    <th>Ruangan</th>
+                    <th style="max-width:40px;">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($ruangan as $r)
                 <tr>
-                    <td>1</td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$r->ruangan}}</td>
+                    <td>
+                        <div class="btn-group">
+                        <a href="{{ route('ruangan.edit', $r->id) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <form action="{{route('ruangan.destroy',$r->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

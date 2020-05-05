@@ -8,6 +8,12 @@
     <div class="card-body">
         <form action="{{ route('tahunangkatan.store') }}" method="post">
             @csrf
+            <div class="form-group">
+            	<label for="">Tahun Angkatan</label>
+                <input type="text" name="tahun_angkatan" class="form-control">
+            </div>
+
+			<button type="submit" class="btn btn-primary">Simpan</button>      
 
 
         </form>

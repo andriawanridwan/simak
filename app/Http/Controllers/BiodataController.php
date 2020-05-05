@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Ruangan;
 use Illuminate\Http\Request;
-
-class RuanganController extends Controller
+use App\Dosen;
+use App\Mahasiswa;
+use App\TahunAkademik;
+use App\Registrasi;
+use Auth;
+class BiodataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,18 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        $ruangan = Ruangan::all();
-        return view('ruangan.index_ruangan',compact('ruangan'));
+        if(Auth::user()->level == 'Dosen'){
+            $val = Auth::user()->username;
+            $biodata = Dosen::where('nip',$val)->first();
+        }else{
+            $biodata = Mahasiswa::first();
+            $akademik = TahunAkademik::where('status','aktif')->first();
+            $semester = Registrasi::where(['nim' => Auth::user()->username,'tahun_akademik_id' => $akademik->id])->first();
+            return view('biodata.index_biodata',compact('biodata','semester'));
+        }
+    
+
+        return view('biodata.index_biodata',compact('biodata'));
     }
 
     /**
@@ -25,7 +38,7 @@ class RuanganController extends Controller
      */
     public function create()
     {
-        return view('ruangan.create_ruangan');
+        //
     }
 
     /**
@@ -36,8 +49,7 @@ class RuanganController extends Controller
      */
     public function store(Request $request)
     {
-        Ruangan::create($request->all());
-        return redirect(route('ruangan.index'))->with('pesan','Berhasil Disimpan');
+        //
     }
 
     /**
@@ -59,8 +71,7 @@ class RuanganController extends Controller
      */
     public function edit($id)
     {
-        $ruangan = Ruangan::findOrFail($id);
-        return view('ruangan.edit_ruangan',compact('ruangan'));
+        //
     }
 
     /**
@@ -72,9 +83,7 @@ class RuanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ruangan = Ruangan::findOrFail($id);
-        $ruangan->update($request->all());
-        return redirect(route('ruangan.index'))->with('pesan','Berhasil DiUpdate');
+        //
     }
 
     /**
@@ -85,8 +94,6 @@ class RuanganController extends Controller
      */
     public function destroy($id)
     {
-        ruangan::destroy($id);
-        return redirect(route('ruangan.index'))->with('pesan','Berhasil DIhapus');
-
+        //
     }
 }

@@ -16,15 +16,38 @@
     <div class="card-body">
         <a href="{{ route('matkul.create') }}" class="btn btn-primary mb-4">+ Tambah Data</a>
         <table id="example" class="table table-stripped table-bordered">
-            <thead>
+              <thead>
                 <tr>
-                    <th>No</th>
+                    <th style="max-width:10px;">No</th>
+                    <th>Kode</th>
+                    <th>Mata Kuliah</th>
+                    <th>SKS</th>
+                    <th>Semester</th>
+                    <th style="max-width:100px;">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($matkul as $mapel)
                 <tr>
-                    <td>1</td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$mapel->kode_matkul}}</td>
+                    <td>{{$mapel->matkul}}</td>
+                    <td>{{$mapel->sks}}</td>
+                    <td>Semester{{$mapel->semester}}</td>
+                    <td>
+                        <div class="btn-group">
+                        <a href="{{ route('matkul.edit', $mapel->kode_matkul) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <form action="{{route('matkul.destroy',$mapel->kode_matkul)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

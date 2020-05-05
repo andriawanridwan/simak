@@ -7,6 +7,8 @@ use App\Prodi;
 use App\Konsentrasi;
 use App\Mahasiswa;
 use App\TahunAngkatan;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 use Illuminate\Support\Facades\Input;
 class MahasiswaController extends Controller
 {
@@ -61,6 +63,12 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         Mahasiswa::create($request->all());
+         User::create([
+            'username' => $request->nim,
+            'password' => Hash::make($request->nim),
+            'level' => 'Mahasiswa',
+            'status'    => 1
+        ]);
         return redirect(route('mahasiswa.index'))->with('pesan','Berhasil Disimpan');
     }
     /**

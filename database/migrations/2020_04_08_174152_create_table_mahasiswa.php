@@ -14,7 +14,7 @@ class CreateTableMahasiswa extends Migration
     public function up()
     {
         Schema::create('tb_mahasiswa', function (Blueprint $table) {
-            $table->integer('nim')->primary();
+            $table->integer('nim',50)->primary();
             $table->string('nama');
             $table->string('jk');
             $table->string('agama');
@@ -24,10 +24,10 @@ class CreateTableMahasiswa extends Migration
             $table->integer('prodi_id');
             $table->integer('konsentrasi_id');
             $table->string('alamat');
-            $table->integer('nik_ayah');
+            $table->integer('nik_ayah',100);
             $table->string('nama_ayah');
             $table->string('pekerjaan_ayah');
-            $table->integer('nik_ibu');
+            $table->integer('nik_ibu',100);
             $table->string('nama_ibu');
             $table->string('pekerjaan_ibu');
             $table->timestamps();

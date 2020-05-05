@@ -4,7 +4,7 @@
 <div class="section-header">
     <h1>Khs Mahasiswa</h1>
 </div>
-<div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Pastikan Mahasiswa Sudah Daftar Akademik / Daftar Ulang</div>
+<!-- <div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Pastikan Mahasiswa Sudah Daftar Akademik / Daftar Ulang</div> -->
 <div class="card">
     <div class="card-body">
     <form >
@@ -60,6 +60,7 @@
             </div>
             <div class="col-md-9">
             @if(Request::get('nim'))
+                 <a href="{{route('cetakkhs', Request::get('nim'))}}" class="btn btn-success"><i class="fas fa-print"></i> Cetak Khs</a><br><br>
                 <table class="table table-bordered">
                     <tr>
                         <td>NIM</td>
@@ -99,6 +100,7 @@
                         <?php $i += $k->krs->jadwal->matkul->sks ?>
                         
                     @endforeach
+                    <?php ?>
                     <tr>
                         <td colspan="5" class="text-right">Total Sks</td>
                         <td>{{$i}}</td>

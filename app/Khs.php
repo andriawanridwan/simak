@@ -12,4 +12,8 @@ class Khs extends Model
     public function krs(){
         return $this->belongsTo('App\Krs');
     }
+
+    public function mahasiswa(){
+        return $this->belongsTo('App\Mahasiswa','nim','nim');
+    }
 }

@@ -8,6 +8,8 @@ use App\Prodi;
 use App\TahunAngkatan;
 use App\Mahasiswa;
 use App\Registrasi;
+use App\TahunAkademik;
+use Auth;
 use Illuminate\Support\Facades\Input;
 class KhsController extends Controller
 {
@@ -28,6 +30,25 @@ class KhsController extends Controller
             return view('khs.index_khs',compact('prodi','tahun_angkatan','mahasiswa','khs'));
         }
         return view('khs.index_khs',compact('prodi','tahun_angkatan'));
+    }
+
+    public function cetakkhs($nim){
+        $akademik = TahunAkademik::where('status','aktif')->first();
+        $khs = Khs::where('nim',$nim)->with(['krs.jadwal' => function($q) use($akademik){
+            $q->where('tahun_akademik_id',$akademik->id);
+        }])->get();
+        return view('khs.cetakkhs',compact('khs'));
+    }
+
+    public function khsmahasiswa(){
+        
+        $akademik = TahunAkademik::where('status','aktif')->first();
+        $mahasiswa = Registrasi::where(['nim' => Auth::user()->username, 'tahun_akademik_id' => $akademik->id])->first();
+        $khs = Khs::where('nim',Auth::user()->username)->with(['krs.jadwal' => function($q) use($akademik){
+            $q->where('tahun_akademik_id',$akademik);
+        }])->with('krs.jadwal','krs.jadwal.matkul','krs.jadwal.dosen')->get();
+        
+        return view('khs.khsmahasiswa',compact('khs','mahasiswa'));
     }
 
     public function cari(Request $request){

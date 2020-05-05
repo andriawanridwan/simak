@@ -9,6 +9,9 @@ use App\Jadwal;
 use App\Mahasiswa;
 use App\Krs;
 use App\Khs;
+use Auth;
+use App\TahunAkademik;
+use Illuminate\Support\Facades\Input;
 class KrsController extends Controller
 {
     /**
@@ -23,22 +26,40 @@ class KrsController extends Controller
         return view('krs.index_krs',compact('prodi','mahasiswa'));
     }
 
+    public function krsmahasiswa(){
+        $akademik = TahunAkademik::where('status','aktif')->first();
+        $mahasiswa = Registrasi::where(['nim' => Auth::user()->username, 'tahun_akademik_id' => $akademik->id])->first();
+        $krs = Krs::where('nim',Auth::user()->username)->with(['jadwal' => function($q) use($akademik){
+            $q->where('tahun_akademik_id',$akademik->id);
+        }])->get();
+        return view('krs.krsmahasiswa',compact('mahasiswa','krs'));
+    }
+
+    public function tambahkrs($nim){
+        
+        // if(input::get('semester')){
+        //     $krs = Jadwal::with(['matkul' => function($q){
+        //         $q->where('matkul.semester',2);
+        //     }])->with('matkul')->get();
+        //     return view('krs.tambahkrs',compact('krs'));
+        // }
+        
+        $krs = Jadwal::all();
+        return view('krs.tambahkrs',compact('krs'));
+    }
+
     public function cari(Request $request){
         $mahasiswa = Mahasiswa::where([
             'prodi_id'          => $request->prodi,
             'konsentrasi_id'    => $request->konsentrasi
         ])->get();
-        $registrasi = Registrasi::all();
+        // return $mahasiswa;
+        $registrasi = Registrasi::with('mahasiswa')->get();
         $arr = [];
-        // if(count($registrasi) > 0){
-        //      foreach($mahasiswa as $ma){
-        //         foreach($registrasi as $re){
-        //             if($registrasi->nim == $)
-        //         }
-        //     }
-        // }
+
         $arr2 = [];
         foreach($registrasi as $re){
+            
             if($re->mahasiswa->prodi_id == $request->prodi && $re->mahasiswa->konsentrasi_id == $request->konsentrasi){
                 $arr2['nim'] = $re->nim;
                 $arr2['nama'] = $re->mahasiswa->nama;
@@ -61,6 +82,31 @@ class KrsController extends Controller
 
     public function hapus($id){
         Krs::where('jadwal_id',$id)->delete();
+    }
+
+    //Menu Mahasiswa
+    public function hapuskrsmahasiswa($id){
+        $krs = Krs::where([
+                'nim'   => Auth::user()->username,
+                'id' => $id
+            ])->first();
+        $khs = Khs::where([
+            'nim'   => Auth::user()->username,
+            'krs_id' => $krs->id
+        ])->first();
+        $krs->delete();
+        $khs->delete();
+        return redirect(route('krsmahasiswa'))->with('pesan','Berhasil DiHapus');
+    }
+
+    public function cetakkrs($nim){
+        $akademik = TahunAkademik::where('status','aktif')->first();
+        $mahasiswa = Registrasi::where(['nim' => $nim,'tahun_akademik_id' => $akademik->id])->with('mahasiswa','tahun_akademik')->first();
+        $krs = Krs::where('nim',$nim)->with(['jadwal' => function($q) use($akademik){
+            $q->where('tahun_akademik_id',$akademik->id);
+        }])->with('jadwal','mahasiswa')->get();
+        
+        return view('krs.cetakkrs',compact('krs','mahasiswa'));
     }
     /**
      * Show the form for creating a new resource.
@@ -124,8 +170,12 @@ class KrsController extends Controller
                 'krs_id' => $k->id
             ]);
         }
+        if(Auth::user()->level == 'Admin'){
+            return redirect(route('krs.show',$nim))->with('pesan','Berhasil Diambil');
+        }else{
+            return redirect(route('tambahkrs',$nim))->with('pesan','Berhasil Diambil');
+        }
         
-        return redirect(route('krs.show',$nim));
     }
 
     /**

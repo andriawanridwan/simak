@@ -11,6 +11,8 @@ use App\Jadwal;
 use App\Matkul;
 use App\Ruangan;
 use App\Dosen;
+use Auth;
+use App\Krs;
 class JadwalController extends Controller
 {
     /**
@@ -18,6 +20,19 @@ class JadwalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function lihatjadwal(){
+        $akademik = TahunAkademik::where('status','aktif')->first();
+        $dosen = Dosen::where('nip',Auth::user()->username)->first();
+        $jadwal = Jadwal::all();
+        return view('jadwal.lihatjadwal',compact('akademik','dosen','jadwal'));
+    }
+
+    public function jadwalkuliah(){
+         $akademik = TahunAkademik::where('status','aktif')->first();
+         $jadwal = Krs::where('nim',Auth::user()->username)->get();
+        return view('jadwal.jadwalkuliah',compact('akademik','jadwal'));
+    }
     public function index()
     {
         $prodi = Prodi::all();

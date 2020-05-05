@@ -4,7 +4,14 @@
 <div class="section-header">
     <h1>Krs Mahasiswa</h1>
 </div>
-
+ @if(session('pesan'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('pesan') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 <div class="card">
     <div class="card-body">
         <div class="row">     

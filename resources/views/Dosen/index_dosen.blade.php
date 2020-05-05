@@ -34,7 +34,7 @@
                     <td>{{$dosen->nama}}</td>
                     <td>{{$dosen->no_telp}}</td>
                     <td>{{$dosen->email}}</td>
-                    <td>{{$dosen->prodi}}</td>
+                    <td>{{$dosen->prodi->prodi}}</td>
                     <td>
                         <a href="/dosen/{{$dosen->nip}}/edit" class="btn btn-warning">Edit</a>
                         <a href="/dosen/{{$dosen->nip}}/delete" class="btn btn-danger">Hapus</a>

@@ -5,6 +5,7 @@
     <h1>Krs Mahasiswa</h1>
 </div>
 <div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Pastikan Mahasiswa Sudah Daftar Akademik / Daftar Ulang</div>
+
 <div class="card">
     <div class="card-body">
         <div class="row">
@@ -93,7 +94,8 @@ $('#nama').change(function(){
             var table = "";
             table += '<table class="table table-bordered ">';
                 table += '<tr>';
-                    table += '<td colspan="4"><a href="krs/'+data[1].nim+'" class="btn btn-primary btn-sm">Input Krs</a></td>';
+                    table += '<td colspan="4"><a href="krs/'+data[1].nim+'" class="btn btn-primary btn-sm">Input Krs</a>';
+                    table += '<a href="cetakkrs/'+data[1].nim+'" class="btn btn-success btn-sm"><i class="fas fa-print"></i> Cetak Krs</a></td>';
                 table += '</tr>';
                 table += '<tr>';
                     table += '<td>Nama</td>';

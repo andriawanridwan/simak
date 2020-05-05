@@ -18,13 +18,32 @@
         <table id="example" class="table table-stripped table-bordered">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th style="max-width:10px;">No</th>
+                    <th>Konsentrasi</th>
+                    <th>Prodi</th>
+                    <th style="max-width:40px;">Action</th>
                 </tr>
             </thead>
             <tbody>
+             @foreach($konsentrasi as $k)
                 <tr>
-                    <td>1</td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$k->konsentrasi}}</td>
+                    <td>{{$k->prodi_id}}</td>
+                    <td>   
+                        <div class="btn-group">
+                        <a href="{{ route('konsentrasi.edit', $k->id) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <form action="{{route('konsentrasi.destroy',$k->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

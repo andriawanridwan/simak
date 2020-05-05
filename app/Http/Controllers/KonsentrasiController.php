@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\konsentrasi;
+use App\prodi;
 use Illuminate\Http\Request;
 
 class KonsentrasiController extends Controller
@@ -13,7 +14,8 @@ class KonsentrasiController extends Controller
      */
     public function index()
     {
-        return view('Konsentrasi.index_konsentrasi');
+        $konsentrasi = konsentrasi::all();
+        return view('konsentrasi.index_konsentrasi',compact('konsentrasi'));
     }
 
     /**
@@ -23,7 +25,8 @@ class KonsentrasiController extends Controller
      */
     public function create()
     {
-        return view('Konsentrasi.create_konsentrasi');
+        $prodi = Prodi::all();
+        return view('konsentrasi.create_konsentrasi',compact('prodi'));
     }
 
     /**
@@ -34,7 +37,8 @@ class KonsentrasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         konsentrasi::create($request->all());
+         return redirect(route('konsentrasi.index'))->with('pesan','Berhasil Disimpan');
     }
 
     /**
@@ -56,7 +60,9 @@ class KonsentrasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prodi = Prodi::all();
+        $konsentrasi = konsentrasi::findOrFail($id);
+        return view('konsentrasi.edit_konsentrasi',compact('konsentrasi','prodi'));
     }
 
     /**
@@ -68,7 +74,9 @@ class KonsentrasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $konsentrasi = konsentrasi::findOrFail($id);
+        $konsentrasi->update($request->all());
+         return redirect(route('konsentrasi.index'))->with('pesan','Berhasil DiUpdate');
     }
 
     /**
@@ -79,6 +87,7 @@ class KonsentrasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+       konsentrasi::destroy($id);
+        return redirect(route('konsentrasi.index'))->with('pesan','Berhasil DiHapus');
     }
 }

@@ -18,13 +18,30 @@
         <table id="example" class="table table-stripped table-bordered">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th style="max-width:10px;">No</th>
+                    <th>Tahun Angkatan</th>
+                    <th style="max-width:40px;">Action</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach($tahunangkatan as $angkatan)
                 <tr>
-                    <td>1</td>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$angkatan->tahun_angkatan}}</td>
+                    <td>
+                        <div class="btn-group">
+                        <a href="{{ route('tahunangkatan.edit', $angkatan->id) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <form action="{{route('tahunangkatan.destroy',$angkatan->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

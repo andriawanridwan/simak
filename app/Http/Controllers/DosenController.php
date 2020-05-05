@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Prodi;
-
+use App\User;
 class DosenController extends Controller
 {
     /**
@@ -38,6 +39,13 @@ class DosenController extends Controller
     public function store(Request $request)
     {
         \App\Dosen::create($request->all());
+         User::create([
+            'username' => $request->nip,
+            'email' => $request->email,
+            'password' => Hash::make($request->nip),
+            'level' => 'Dosen',
+            'status'    => 1
+        ]);
         return redirect(route('dosen.index'))->with('pesan','Berhasil Disimpan');;
     }
 
