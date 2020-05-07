@@ -37,7 +37,7 @@ class JadwalController extends Controller
     {
         $prodi = Prodi::all();
         $tahun_angkatan = TahunAngkatan::all();
-        $tahun_akademik = TahunAkademik::all();
+        $tahun_akademik = TahunAkademik::where('status','aktif')->get();
         return view('jadwal.index_jadwal',compact('prodi','tahun_angkatan','tahun_akademik'));
     }
     

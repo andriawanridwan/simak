@@ -4,7 +4,7 @@
 <div class="section-header">
     <h1>Jadwal Kuliah</h1>
 </div>
-<div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Jadwal Kuliah Autosave</div>
+<div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Jadwal Kuliah Autosave dan berdasarkan Tahun akademik yang aktif / berjalan</div>
 <div class="card">
     <div class="card-body">
        <div class="row">

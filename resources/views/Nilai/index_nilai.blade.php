@@ -34,7 +34,7 @@
                     </form>
                 </table>
             </div>
-
+    @if(Request::get('matkul'))
             <div class="col-md-9">
                 <table class="table table-bordered">
                     <tr>
@@ -87,7 +87,7 @@
                     
                 </table>
             </div>
-            
+            @endif
         </div>
     </div>
 </div>

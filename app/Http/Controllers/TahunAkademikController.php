@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Jadwal;
 class TahunAkademikController extends Controller
 {
     /**
@@ -36,7 +36,17 @@ class TahunAkademikController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->status == 'aktif'){
+            \App\TahunAkademik::where('status','aktif')->update(['status' => 'tidak aktif']);
+        }
         \App\TahunAkademik::create($request->all());
+        if($request->status == 'aktif'){
+            $akademik = \App\TahunAkademik::where('status','aktif')->first();
+            $jadwal = Jadwal::all();
+            foreach($jadwal as $j){
+                $j->update(['tahun_akademik_id' => $akademik->id]);
+            }
+        }
         return redirect(route('tahunakademik.index'))->with('pesan','Berhasil Disimpan');;
     }
 
@@ -72,8 +82,20 @@ class TahunAkademikController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->status == 'aktif'){
+            \App\TahunAkademik::where('status','aktif')->update(['status' => 'tidak aktif']);
+        }
+        
         $tahun_akademik = \App\TahunAkademik::find($id);
         $tahun_akademik->update($request->all());
+
+        if($request->status == 'aktif'){
+            $akademik = \App\TahunAkademik::where('status','aktif')->first();
+            $jadwal = Jadwal::all();
+            foreach($jadwal as $j){
+                $j->update(['tahun_akademik_id' => $akademik->id]);
+            }
+        }
         return redirect(route('tahunakademik.index'))->with('pesan','Berhasil Diupdate');
     }
 

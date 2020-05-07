@@ -38,9 +38,9 @@ Route::group(['middleware' => ['auth','admin']], function(){
     Route::resource('/tahunangkatan','TahunAngkatanController');
     Route::resource('/tahunakademik','TahunAkademikController');
     Route::post('/tahunakademik/create','TahunAkademikController@store');
-    Route::get('/tahunakademik/{id}/edit','TahunAkademikController@edit');
+    // Route::get('/tahunakademik/{id}/edit','TahunAkademikController@edit');
     Route::post('/tahunakademik/{id}/update','TahunAkademikController@update');
-    Route::get('/tahunakademik/{id}/delete', 'TahunAkademikController@destroy');
+    Route::get('/tahunakademik/{id}/delete', 'TahunAkademikController@destroy')->name('tahunakademik.delete');
     Route::resource('/matkul','MatkulController');
     Route::resource('/jadwal','JadwalController');
     Route::resource('/krs','KrsController');

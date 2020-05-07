@@ -52,7 +52,15 @@ class MatkulController extends Controller
      */
     public function store(Request $request)
     {
+        $akademik = \App\TahunAkademik::where('status','aktif')->first();
+        \App\Jadwal::insert([
+            'tahun_akademik_id' => $akademik->id,
+            'matkul_id' => $request->kode_matkul,
+            'prodi_id'  => $request->prodi_id,
+            'konsentrasi_id' => $request->konsentrasi_id
+        ]);
         Matkul::create($request->all());
+
         return redirect(route('matkul.index'))->with('pesan','Berhasil Disimpan');
     }
 

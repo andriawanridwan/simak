@@ -32,8 +32,10 @@
                     <td>{{$tahun_akademik->keterangan}}</td>
                     <td>{{$tahun_akademik->status}}</td>
                     <td>
-                        <a href="/tahunakademik/{{$tahun_akademik->id}}/edit" class="btn btn-warning">Edit</a>
-                        <a href="/tahunakademik/{{$tahun_akademik->id}}/delete" class="btn btn-danger">Hapus</a>
+                        <!-- <a href="/tahunakademik/{{$tahun_akademik->id}}/edit" class="btn btn-warning">Edit</a>
+                        <a href="/tahunakademik/{{$tahun_akademik->id}}/delete" class="btn btn-danger">Hapus</a> -->
+                        <a href="{{route('tahunakademik.edit',$tahun_akademik->id)}}" class="btn btn-warning">Edit</a>
+                        <a href="{{route('tahunakademik.delete',$tahun_akademik->id)}}" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
             @endforeach

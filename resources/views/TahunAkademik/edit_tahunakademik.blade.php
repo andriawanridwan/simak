@@ -6,9 +6,9 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <form action="/tahunakademik/{{$tahun_akademik->id}}/update" method="post">
+        <form action="{{route('tahunakademik.update',$tahun_akademik->id)}}" method="post">
             @csrf
-
+            @method('PATCH')
             <div class="form-group">
                 <label>Tahun Akademik</label>
                 <input type="text" name="tahun_akademik" class="form-control" value="{{$tahun_akademik->tahun_akademik}}"> 
@@ -22,9 +22,9 @@
             <div class="form-group">
                 <label for="">Status</label>
                 <select name="status"  class="form-control">
-
-                    <option value="Aktif" @if($tahun_akademik->status == "Aktif") selected @endif >Aktif</option>
-                    <option value="Tidak Aktif" @if($tahun_akademik->status == "Tidak Aktif") selected @endif>Tidak Aktif</option>
+                    <option value="" disabled selected>-- Pilih Status --</option>
+                    <option value="aktif" @if($tahun_akademik->status == "aktif") selected @endif >Aktif</option>
+                    <option value="tidak aktif" @if($tahun_akademik->status == "tidak aktif") selected @endif>Tidak Aktif</option>
                 </select>
             </div>
             

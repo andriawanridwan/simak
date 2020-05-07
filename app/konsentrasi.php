@@ -8,4 +8,8 @@ class Konsentrasi extends Model
 {
     protected $table = 'tb_konsentrasi';
     protected $guarded = [];
+
+    public function prodi(){
+        return $this->belongsTo('App\Prodi');
+    }
 }

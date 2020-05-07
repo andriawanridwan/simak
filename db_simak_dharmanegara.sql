@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2020 at 01:38 AM
+-- Generation Time: May 07, 2020 at 07:01 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -87,10 +87,7 @@ CREATE TABLE `tb_dosen` (
 --
 
 INSERT INTO `tb_dosen` (`nip`, `nama`, `no_telp`, `email`, `prodi_id`, `created_at`, `updated_at`) VALUES
-(12345, '12345', '083819658794', 'dosen@gmail.com', 1, '2020-04-11 02:00:41', '2020-04-11 02:00:41'),
-(123456, 'Andriawan Ridwan', '083819658794', 'andriawan787@gmail.com', 1, NULL, NULL),
-(11706125, 'andri', '082345123', 'andri@gmail.com', 1, '2020-05-04 10:47:29', '2020-05-04 10:47:29'),
-(12345678, 'andri', '08381965879', 'andri@gmail.com', 1, '2020-05-04 10:45:51', '2020-05-04 10:45:51');
+(11706125, 'andri', '082345123', 'andri@gmail.com', 1, '2020-05-04 10:47:29', '2020-05-04 10:47:29');
 
 -- --------------------------------------------------------
 
@@ -100,7 +97,7 @@ INSERT INTO `tb_dosen` (`nip`, `nama`, `no_telp`, `email`, `prodi_id`, `created_
 
 CREATE TABLE `tb_jadwal` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tahun_akademik_id` int(11) NOT NULL,
+  `tahun_akademik_id` int(11) DEFAULT NULL,
   `prodi_id` int(11) NOT NULL,
   `konsentrasi_id` int(11) NOT NULL,
   `hari` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -118,8 +115,9 @@ CREATE TABLE `tb_jadwal` (
 --
 
 INSERT INTO `tb_jadwal` (`id`, `tahun_akademik_id`, `prodi_id`, `konsentrasi_id`, `hari`, `matkul_id`, `ruangan_id`, `jam_mulai`, `jam_selesai`, `dosen_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'Senin', 'DTIKB001', 1, '07:00:00', '08:00:00', 11706125, NULL, '2020-04-10 08:34:52'),
-(2, 1, 1, 1, 'Rabu', 'DTIKB002', 1, '21:00:00', '22:00:00', 11706125, NULL, '2020-04-10 09:17:13');
+(1, 1, 1, 1, 'Senin', 'DTIKB001', 1, '07:00:00', '08:00:00', 11706125, NULL, '2020-05-07 04:29:39'),
+(2, 1, 1, 1, 'Rabu', 'DTIKB002', 1, '21:00:00', '22:00:00', 11706125, NULL, '2020-05-07 04:29:39'),
+(3, 1, 1, 1, 'Kamis', 'DTIKB004', 1, '10:00:00', '00:00:00', 11706125, NULL, '2020-05-07 04:29:39');
 
 -- --------------------------------------------------------
 
@@ -249,7 +247,8 @@ CREATE TABLE `tb_matkul` (
 INSERT INTO `tb_matkul` (`kode_matkul`, `prodi_id`, `konsentrasi_id`, `matkul`, `sks`, `semester`, `created_at`, `updated_at`) VALUES
 ('DTIKB001', 1, 1, 'Konsep Pemrograman', 4, 1, NULL, NULL),
 ('DTIKB002', 1, 1, 'Praktek Konsep Pemrograman', 4, 1, NULL, '2020-05-05 04:15:21'),
-('DTIKB003', 1, 1, 'Algoritma', 3, 1, '2020-05-05 02:54:13', '2020-05-05 02:54:13');
+('DTIKB003', 1, 1, 'Algoritma', 3, 1, '2020-05-05 02:54:13', '2020-05-05 02:54:13'),
+('DTIKB004', 1, 1, 'Teknik Komputer Dasar', 4, 1, '2020-05-07 03:54:45', '2020-05-07 03:54:45');
 
 -- --------------------------------------------------------
 
@@ -333,7 +332,7 @@ CREATE TABLE `tb_tahun_akademik` (
 --
 
 INSERT INTO `tb_tahun_akademik` (`id`, `tahun_akademik`, `keterangan`, `status`, `created_at`, `updated_at`) VALUES
-(1, '20181', 'Semester Ganjil', 'aktif', NULL, NULL);
+(1, '20181', 'Semester Ganjil', 'aktif', NULL, '2020-05-07 04:29:39');
 
 -- --------------------------------------------------------
 
@@ -353,7 +352,8 @@ CREATE TABLE `tb_tahun_angkatan` (
 --
 
 INSERT INTO `tb_tahun_angkatan` (`id`, `tahun_angkatan`, `created_at`, `updated_at`) VALUES
-(1, '2014', NULL, NULL);
+(1, '2014', NULL, NULL),
+(2, '2020', '2020-05-07 03:33:46', '2020-05-07 03:33:46');
 
 -- --------------------------------------------------------
 
@@ -380,7 +380,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `email_verified_at`, `password`, `level`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, '12345', 'andriawan@gmail.com', NULL, '$2y$10$3kVERKmJvWLWFRihnMBcNOcO9o/cT2HGY7LPqTYadS7f6NvoNLMR2', 'Admin', '1', NULL, '2020-04-11 01:58:58', '2020-04-11 01:58:58'),
-(3, 'admin', 'admin@gmail.com', NULL, '$2y$10$42WQyJg3paYrYo3eh1Xh8ueoAo/2iOcuAhX3Q60I719CH5tP/z.DC', 'Admin', '1', NULL, NULL, '2020-05-04 10:44:54'),
+(3, 'admin', 'admin@gmail.com', NULL, '$2y$10$95lYAGQKy.FS2Gtjf35eVOpgx0rwuCDo8chqxv/d4wCN.vMuaVO1e', 'Admin', '1', NULL, NULL, '2020-05-07 04:47:17'),
 (4, '11706125', 'andri@gmail.com', NULL, '$2y$10$IoDZBLX/nPfAOlM/Wjby6.ChYcySkoWTODiuBfxGQUoDc9/h/oivy', 'Dosen', '1', NULL, '2020-05-04 10:47:29', '2020-05-04 10:47:29'),
 (5, '903583', NULL, NULL, '$2y$10$S5e9LoOj.Llx58A1JllHZ.0Tx7h883oDWN3yw4o1B4TrqRm4Gioqm', 'Mahasiswa', '1', NULL, '2020-05-04 10:56:54', '2020-05-04 10:56:54');
 
@@ -493,7 +493,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `tb_jadwal`
 --
 ALTER TABLE `tb_jadwal`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_khs`
@@ -535,13 +535,13 @@ ALTER TABLE `tb_ruangan`
 -- AUTO_INCREMENT for table `tb_tahun_akademik`
 --
 ALTER TABLE `tb_tahun_akademik`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_tahun_angkatan`
 --
 ALTER TABLE `tb_tahun_angkatan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -29,8 +29,8 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$k->konsentrasi}}</td>
-                    <td>{{$k->prodi_id}}</td>
-                    <td>   
+                    <td>{{$k->prodi->prodi}}</td>
+                    <td width="15%">   
                         <div class="btn-group">
                         <a href="{{ route('konsentrasi.edit', $k->id) }}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                         </div>
