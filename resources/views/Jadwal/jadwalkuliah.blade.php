@@ -36,7 +36,7 @@
                 <td>{{$j->jadwal->matkul_id}}</td>
                 <td>{{$j->jadwal->matkul->matkul}}</td>
                 <td>{{$j->jadwal->matkul->sks}}</td>
-                <td>{{$j->jadwal->ruangan->ruangan}}</td>
+                <td>{{$j->ruangan_id == null || $j->ruangan_id == '' ? 'Not Set' : $j->ruangan->ruangan  }}</td>
                 <td>{{$j->jadwal->jam_mulai}} - {{$j->jadwal->jam_selesai}}</td>
                 <td>{{$j->jadwal->dosen->nama}}</td>
             </tr>
