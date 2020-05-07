@@ -39,7 +39,7 @@
                 <td>{{$j->matkul->kode_matkul}}</td>
                 <td>{{$j->matkul->matkul}}</td>
                 <td>{{$j->hari}}</td>
-                <td>{{$j->ruangan->ruangan}}</td>
+                <td>{{$j->ruangan_id == null || $j->ruangan_id == '' ? 'Not Set' : $j->ruangan->ruangan  }}</td>
                 <td>{{$j->jam_mulai}} - {{$j->jam_selesai}}</td>
                 <td>{{$j->matkul->sks}}</td>
             </tr>
