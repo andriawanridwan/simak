@@ -4,7 +4,7 @@
 <div class="section-header">
     <h1>Khs Mahasiswa</h1>
 </div>
-<!-- <div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Pastikan Mahasiswa Sudah Daftar Akademik / Daftar Ulang</div> -->
+<div class="alert alert-primary"><i class="fas fa-info"></i>&nbsp;&nbsp;&nbsp; Pastikan Mahasiswa Sudah Daftar Akademik / Daftar Ulang</div>
 <div class="card">
     <div class="card-body">
     <form >
