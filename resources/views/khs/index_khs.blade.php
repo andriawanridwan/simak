@@ -12,23 +12,28 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="">Prodi</label>
-                    <select name="" id="prodi" class="form-control">
+                    <select name="prodi" id="prodi" class="form-control">
                         <option value="" disabled selected> -- Pilih Prodi --</option>
                         @foreach($prodi as $p)
-                        <option value="{{ $p->id }}">{{ $p->prodi }}</option>
+                        <option {{Request::get('prodi') == $p->id ? 'selected' : ''}} value="{{ $p->id }}">{{ $p->prodi }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="">Konsentrasi</label>
-                    <select name="" id="konsentrasi" class="form-control">
+                    <select name="konsentrasi" id="konsentrasi" class="form-control">
                         <option value="" disabled selected> -- Pilih Konsentrasi --</option>
+                        @isset($konsentrasi)
+                            @foreach($konsentrasi as $k)
+                                <option {{Request::get('konsentrasi') == $k->id ? 'selected' : ''}} value="{{$k->id}}">{{$k->konsentrasi}}</option>
+                            @endforeach
+                        @endisset
                     </select>
                 </div>  
 
                 <div class="form-group">
                     <label for="">Tahun Angkatan</label>
-                    <select name="" id="tahun_angkatan" class="form-control">
+                    <select name="tahun_angkatan" id="tahun_angkatan" class="form-control">
                         <option value="" disabled selected>-- Pilih Tahun Angkatan --</option>
                         @foreach($tahun_angkatan as $ta)
                             <option value="{{$ta->id}}">{{$ta->tahun_angkatan }}</option>
@@ -70,7 +75,7 @@
                     <tr>
                         <td>{{$mahasiswa->nim}}</td>
                         <td>{{$mahasiswa->mahasiswa->nama}}</td>
-                        <td>{{ substr($mahasiswa->tahun_akademik->tahun_akademik,4)}}</td>
+                        <td>{{ Request::get('semester')}}</td>
                     </tr>
 
                 </table>

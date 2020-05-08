@@ -49,7 +49,7 @@ class RegistrasiController extends Controller
                     if($r->nim == $ma->nim){
                     $arr['tahun_akd'] = $registrasi[$i]->tahun_akademik->tahun_akademik;
                     $arr['status'] = '<span class="badge badge-pill badge-primary">Aktif</span>';
-                    $arr['tanggal_registrasi'] = $r->created_at->format('d/m/Y');
+                    $arr['tanggal_registrasi'] = $r->created_at == null ? '-' : $r->created_at->format('d/m/Y');
                     $arr['action'] = '<button id="action" class="btn btn-danger ">Batal Registrasi</button>';
                     }
                 }

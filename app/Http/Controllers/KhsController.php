@@ -10,6 +10,7 @@ use App\Mahasiswa;
 use App\Registrasi;
 use App\TahunAkademik;
 use Auth;
+use App\Konsentrasi;
 use Illuminate\Support\Facades\Input;
 class KhsController extends Controller
 {
@@ -23,11 +24,15 @@ class KhsController extends Controller
         $prodi = Prodi::all();
         $tahun_angkatan = TahunAngkatan::all();
         $nim = Input::get('nim');
+        $semester = Input::get('semester');
         if($nim){
+            $konsentrasi = Konsentrasi::where('prodi_id',Input::get('prodi'))->get();
             $mahasiswa = Registrasi::where('nim',$nim)->with('mahasiswa','tahun_akademik')->first();
-            $khs       = Khs::where('nim',$nim)->with('krs','krs.jadwal','krs.jadwal.matkul','krs.jadwal.dosen')->get();
-         
-            return view('khs.index_khs',compact('prodi','tahun_angkatan','mahasiswa','khs'));
+            $khs       = Khs::where(['nim' => $nim])->whereHas('krs.jadwal.matkul', function($q) use($semester){
+                $q->where('semester',$semester);
+            })->with('krs','krs.jadwal','krs.jadwal.matkul','krs.jadwal.dosen')->get();
+            
+            return view('khs.index_khs',compact('prodi','tahun_angkatan','mahasiswa','khs','konsentrasi'));
         }
         return view('khs.index_khs',compact('prodi','tahun_angkatan'));
     }
@@ -62,7 +67,7 @@ class KhsController extends Controller
         
         $arr2 = [];
         foreach($registrasi as $re){
-            if($re->mahasiswa->prodi_id == $request->prodi && $re->mahasiswa->konsentrasi_id == $request->konsentrasi){
+            if($re->mahasiswa->prodi_id == $request->prodi && $re->mahasiswa->konsentrasi_id == $request->konsentrasi && $re->mahasiswa->tahun_angkatan_id == $request->tahun_angkatan){
                 $arr2['nim'] = $re->nim;
                 $arr2['nama'] = $re->mahasiswa->nama;
                 array_push($arr,$arr2);
@@ -70,6 +75,7 @@ class KhsController extends Controller
         }
        
         return $arr;
+
     }
     /**
      * Show the form for creating a new resource.
