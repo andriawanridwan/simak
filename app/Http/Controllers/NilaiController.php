@@ -32,10 +32,11 @@ class NilaiController extends Controller
            $fmatkul = Matkul::where('kode_matkul',Input::get('matkul'))->first();
            $khs = [];
            foreach($mahasiswa as $m){
-               $k = Khs::where('nim',$m->nim)->with('mahasiswa')->first();
+               $k = Khs::where(['nim' => $m->nim])->whereHas('krs.jadwal', function($q){
+                   $q->where('matkul_id',Input::get('matkul'));
+               })->with('mahasiswa')->first();
                array_push($khs,$k);
            }
-         
             return view('nilai.index_nilai',compact('akademik','matkul','dosen','khs','fmatkul'));
         }
         return view('nilai.index_nilai',compact('akademik','matkul','dosen'));
