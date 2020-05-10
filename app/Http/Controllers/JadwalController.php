@@ -30,7 +30,8 @@ class JadwalController extends Controller
 
     public function jadwalkuliah(){
          $akademik = TahunAkademik::where('status','aktif')->first();
-         $jadwal = Krs::where('nim',Auth::user()->username)->get();
+         $jadwal = Krs::where('nim',Auth::user()->username)->with('jadwal','jadwal.ruangan')->get();
+         
         return view('jadwal.jadwalkuliah',compact('akademik','jadwal'));
     }
     public function index()
