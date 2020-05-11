@@ -18,7 +18,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth','admin']], function(){
     Route::get('/', function () {
         $mahasiswa = App\Mahasiswa::count();
-        $user      = App\User::count();
+        $user      = App\User::where('level','Admin')->count();
         $dosen     = App\Dosen::count();
     return view('dashboard',compact('mahasiswa','user','dosen'));
     });
