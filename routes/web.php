@@ -17,7 +17,10 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth','admin']], function(){
     Route::get('/', function () {
-    return view('dashboard');
+        $mahasiswa = App\Mahasiswa::count();
+        $user      = App\User::count();
+        $dosen     = App\Dosen::count();
+    return view('dashboard',compact('mahasiswa','user','dosen'));
     });
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/registrasi/delete/{id}','RegistrasiController@hapus');
