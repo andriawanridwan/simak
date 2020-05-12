@@ -127,7 +127,11 @@ $('#nama').change(function(){
                         table += '<td>'+item.jadwal.matkul.kode_matkul+'</td>';
                         table += '<td>'+item.jadwal.matkul.matkul+'</td>';
                         table += '<td>'+item.jadwal.matkul.sks+'</td>';
-                        table += '<td>'+item.jadwal.dosen.nama+'</td>';
+                        if(item.jadwal.dosen == null){
+                            table += '<td>Not Set</td>';
+                        }else{
+                            table += '<td>'+item.jadwal.dosen.nama+'</td>';
+                        }
                         table += '<td style="text-align:center"><input id="jadwal_id" type="hidden" value="'+item.jadwal_id+'"><button id="hapus" class="btn btn-danger"><i class="fas fa-trash"></button></td>';
                     table += '</tr>';
                     total_sks += item.jadwal.matkul.sks;

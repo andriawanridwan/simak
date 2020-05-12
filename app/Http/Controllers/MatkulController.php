@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Matkul;
 use Illuminate\Http\Request;
 use App\Prodi;
+use App\Jadwal;
 use App\Konsentrasi;
 class MatkulController extends Controller
 {
@@ -111,6 +112,7 @@ class MatkulController extends Controller
      */
     public function destroy($id)
     {
+        Jadwal::where('matkul_id',$id)->delete();
         Matkul::destroy($id);
         return redirect(route('matkul.index'))->with('pesan','Berhasil Dihapus');
     }

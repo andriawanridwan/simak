@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="section-header">
-    <h1>Prodi</h1>
+    <h1>Pengguna</h1>
 </div>
  @if(session('pesan'))
         <div class="alert alert-primary alert-dismissible fade show" role="alert">

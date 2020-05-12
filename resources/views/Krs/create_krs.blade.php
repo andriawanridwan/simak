@@ -45,22 +45,24 @@
                         <td>Dosen</td>
                         <td>Ambil</td>
                     </tr>
-                    @foreach($jadwal as $k)
+                    @if(count($jadwal) > 0)
+                        @foreach($jadwal as $k)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$k->matkul->semester}}</td>
+                                <td>{{$k->matkul->kode_matkul}}</td>
+                                <td>{{$k->matkul->matkul}}</td>
+                                <td>{{$k->matkul->sks}}</td>
+                                <td>{{$k->dosen_id == null ? 'Not Set' : $k->dosen->nama }}</td>
+                                <td><a href="{{route('ambilkrs',[$mahasiswa->nim,$k->id])}}" class="btn btn-primary">Ambil</a></td>
+                            </tr>
+                        @endforeach
+                    @else
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$k->matkul->semester}}</td>
-                            <td>{{$k->matkul->kode_matkul}}</td>
-                            <td>{{$k->matkul->matkul}}</td>
-                            <td>{{$k->matkul->sks}}</td>
-                            <td>{{$k->dosen->nama}}</td>
-
-                                            <td><a href="{{route('ambilkrs',[$mahasiswa->nim,$k->id])}}" class="btn btn-primary">Ambil</a></td>
-                                    
-                                
-                            
-                        
+                            <td colspan="7" class="text-center">Tidak ada data</td>
                         </tr>
-                    @endforeach
+                    @endif
+                    
                 </table>
             </div>
         </div>

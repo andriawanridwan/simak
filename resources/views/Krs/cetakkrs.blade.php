@@ -60,7 +60,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$k->jadwal->matkul_id}}</td>
-                <td>{{$k->jadwal->matkul->matkul}}}</td>
+                <td>{{$k->jadwal->matkul->matkul}}</td>
                 <td>{{$k->jadwal->matkul->sks}}</td>
             </tr>
             <?php $i += $k->jadwal->matkul->sks ?>

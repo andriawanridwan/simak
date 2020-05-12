@@ -29,9 +29,9 @@ class KrsController extends Controller
     public function krsmahasiswa(){
         $akademik = TahunAkademik::where('status','aktif')->first();
         $mahasiswa = Registrasi::where(['nim' => Auth::user()->username, 'tahun_akademik_id' => $akademik->id])->first();
-        $krs = Krs::where('nim',Auth::user()->username)->with(['jadwal' => function($q) use($akademik){
+        $krs = Krs::where('nim',Auth::user()->username)->whereHas('jadwal', function($q) use($akademik){
             $q->where('tahun_akademik_id',$akademik->id);
-        }])->get();
+        })->get();
         return view('krs.krsmahasiswa',compact('mahasiswa','krs'));
     }
 

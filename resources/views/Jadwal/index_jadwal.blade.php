@@ -112,11 +112,11 @@ $('#semester').change(function(){
             $('table tbody').empty();
             var table = '';
             if(data[0].length == 0){
-                table += '<tr><td colspan="8" style="text-align:center">Semester '+semester+'</td></tr>';
+                //table += '<tr><td colspan="8" style="text-align:center">Semester '+semester+'</td></tr>';
                 table += '<tr><td colspan="8" style="text-align:center">Tidak Ada Data</td></tr>';
             }
             else{
-                table += '<tr><td colspan="8" style="text-align:center">Semester '+data[0][1].semester+'</td></tr>';
+                //table += '<tr><td colspan="8" style="text-align:center">Semester </td></tr>';
                 var i = 1;
 
                 $.each(data[3], function(index,item){

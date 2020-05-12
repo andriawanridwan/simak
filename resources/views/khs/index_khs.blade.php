@@ -96,7 +96,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $k->krs->jadwal->matkul->kode_matkul }}</td>
                             <td>{{ $k->krs->jadwal->matkul->matkul }}</td>
-                            <td>{{ $k->krs->jadwal->dosen->nama }}</td>
+                            <td>{{ $k->krs->jadwal->dosen == null ? 'Not Set' : $k->krs->jadwal->dosen->nama }}</td>
                             <td>{{ $k->grade }}</td>
                             <td>{{ $k->krs->jadwal->matkul->sks}}</td>
                             <td>{{ $k->mutu}}</td>
