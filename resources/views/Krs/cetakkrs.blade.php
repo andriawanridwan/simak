@@ -55,7 +55,7 @@
             <th>MATAKULIAH</th>
             <th>SKS</th>
         </tr>
-        <?php $i = 1 ?>
+        <?php $i = 0 ?>
         @foreach($krs as $k)
             <tr>
                 <td>{{$loop->iteration}}</td>
